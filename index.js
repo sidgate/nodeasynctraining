@@ -1,3 +1,4 @@
+const util = require('./util');
 //TODO functions, lambda
 // TODO function class
 // TODO prototype function
@@ -9,4 +10,4 @@
 // TODO callback hell
 // TODO Promise
 // TODO Resolve/Reject
-//
+// Event listener
