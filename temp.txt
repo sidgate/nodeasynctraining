@@ -1,0 +1,2 @@
+https://api.bseindia.com/BseIndiaAPI/api/GetLinknew/w?code=16
+https://api.bseindia.com/BseIndiaAPI/api/GetLinknew/w?code=81
