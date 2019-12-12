@@ -1,7 +1,7 @@
 const utilFn = require('./util-fn');
 const util = require('util')
-//const r = require('request');
-//const fs = require('fs')
+const r = require('request');
+const fs = require('fs')
 
 
 // TODO functions, lambda
@@ -46,10 +46,44 @@ function calculator(a,b, op ){
     return op(a,b)
 }
 
-console.log(calculator(20,10,subs))
+//console.log(calculator(20,10,subs))
 
-// TODO setTimeout
-// TODO callback
+// TODO setTimeout 
+function readFile(filename){
+    
+    let callback = function(){
+        console.log(filename)
+        utilFn.longRunningFn(3000)
+        console.log('done '+ filename)
+    }
+
+    setTimeout(callback)
+    
+}
+
+console.log('start')
+
+fs.readFile('temp.txt','utf-8', function(err, content){
+    let urls = content.split('\n');
+
+    r.get(urls[0], function(err, response){
+        let body = JSON.parse(response.body)
+        console.log(body.CurrValue)
+        if(true){
+            r.get(urls[1], function(err2, response2){
+                let body = JSON.parse(response2.body)
+                console.log(body.CurrValue)
+            });
+        }
+    });
+
+});
+
+
+
+console.log('end')
+
+
 // TODO closure
 // TODO File handling
 // TODO Http request
