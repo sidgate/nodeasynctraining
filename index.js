@@ -3,7 +3,43 @@ const util = require('util')
 //const r = require('request');
 //const fs = require('fs')
 
+
 // TODO functions, lambda
+
+function print(){
+    console.log('hello')
+}
+
+let print2 = ()=> console.log('hello2')
+
+let print3 = function(){
+    console.log('hello3')
+}
+
+function Person(name){
+this.name = name
+
+this.getName = function(){
+    return this.name;
+}
+}
+
+
+
+
+class Person2 {
+    constructor(name){
+        this.name = name;
+    }
+
+    getName(){
+        return this.name;
+    }
+}
+
+console.log(new Person('si2').getFullName())
+
+
 // TODO function class
 // TODO prototype function
 // TODO ES6 class function
@@ -26,5 +62,7 @@ const util = require('util')
 
 
 console.log('start')
+
+print2()
 
 console.log('end')
