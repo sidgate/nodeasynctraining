@@ -80,9 +80,8 @@ console.log('start')
 
 
 // fs.readFile('temp.txt','utf-8', function(err, content){
-//     let urls = content.split('\n');
-//     r.get(urls[0], urlCall(urls));
-
+//     // let urls = content.split('\n');
+//     // r.get(urls[0], urlCall(urls));
 // });
 
 
@@ -108,24 +107,31 @@ console.log('start')
 // promise.then((content) => (
 //     console.log(content)
 // ))
-
+fs.readFile('temp.txt','utf-8', function(err, content){
+});
 
 var promReadfile = util.promisify(fs.readFile)
-promReadfile('temp.txt','utf-8').then((content)=>{
-     urls = content.split('\n');
-     var prom1 = rp.get(urls[0]);
-     var prom2 = rp.get(urls[1]);
-    //  console.log(prmomise1);
+
+    promReadfile('temp.txt','utf-8').then((content)=>{
+        urls = content.split('\n');
+        var prom1 = rp.get(urls[0]);
+        var prom2 = rp.get(urls[1]);
+
      prom1.then((response)=>{
          body = JSON.parse(response)
         console.log(body.CurrValue)
      })
+
      prom2.then((response)=>{
          body = JSON.parse(response)
          console.log(body.CurrValue);
      })
-})
 
+    // Promise.all([prom1,prom2]).then((response)=> {
+    //         body = JSON.parse(response)
+    //         console.log(body.CurrValue);
+    //     })
+});
 
 
 
