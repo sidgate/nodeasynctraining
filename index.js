@@ -2,7 +2,8 @@ const utilFn = require('./util-fn');
 const util = require('util')
 const r = require('request');
 const fs = require('fs')
-
+var promise=require('promise');
+// var urls;
 
 // TODO functions, lambda
 
@@ -46,6 +47,8 @@ function calculator(a,b, op ){
     return op(a,b)
 }
 
+
+
 //console.log(calculator(20,10,subs))
 
 // TODO setTimeout 
@@ -63,11 +66,9 @@ function readFile(filename){
 
 console.log('start')
 
-fs.readFile('temp.txt','utf-8', function(err, content){
-    let urls = content.split('\n');
-
-    r.get(urls[0], function(err, response){
-        let body = JSON.parse(response.body)
+let urlCallback=function(urls){
+    return function(err,response){
+    let body = JSON.parse(response.body)
         console.log(body.CurrValue)
         if(true){
             r.get(urls[1], function(err2, response2){
@@ -75,14 +76,55 @@ fs.readFile('temp.txt','utf-8', function(err, content){
                 console.log(body.CurrValue)
             });
         }
-    });
+}
+}
+fs.readFile('temp.txt','utf-8', function(err, content){
+     urls = content.split('\n');
 
+    r.get(urls[0], urlCallback(urls));
+        // let body = JSON.parse(response.body)
+        // console.log(body.CurrValue)
+        // if(true){
+        //     r.get(urls[1], function(err2, response2){
+        //         let body = JSON.parse(response2.body)
+        //         console.log(body.CurrValue)
+        //     });
+        // }
+   
 });
-
 
 
 console.log('end')
 
+
+var promise=new promise(function(resolve,reject){
+    // fs.readFile('temp.txt','utf-8',function(err,content){
+    //     if(err){
+    //         reject(err);
+    //         return;
+    //     }
+    //     return resolve(content);
+    // })
+
+    fs.readFile('temp.txt','utf-8', function(err, content){
+        urls = content.split('\n');
+   
+       r.get(urls[0], urlCallback(urls));
+
+    
+    if(err){
+                reject(err);
+                return;
+            }
+            return resolve(content);
+        })
+    
+    reject(new Error('some error'))
+});
+
+promise.then((content)=>{
+    console.log(content);
+})
 
 // TODO closure
 // TODO File handling
