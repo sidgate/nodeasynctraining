@@ -36,15 +36,18 @@ class Person2 {
         return this.name;
     }
 }
-
-console.log(new Person('si2').getFullName())
-
-
-// TODO function class
-// TODO prototype function
-// TODO ES6 class function
-// TODO prototype function (lambda)
 // TODO function as parameter
+
+function add(a,b) { return a+b}
+
+function subs(a,b) {return a-b}
+
+function calculator(a,b, op ){
+    return op(a,b)
+}
+
+console.log(calculator(20,10,subs))
+
 // TODO setTimeout
 // TODO callback
 // TODO closure
@@ -61,8 +64,3 @@ console.log(new Person('si2').getFullName())
 // TODO Event listener
 
 
-console.log('start')
-
-print2()
-
-console.log('end')
