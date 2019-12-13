@@ -48,7 +48,7 @@ function calculator(a,b, op ){
     return op(a,b)
 }
 
-//console.log(calculator(20,10,subs))
+console.log(calculator(20,10,subs))
 
 // TODO setTimeout 
 function readFile(filename){

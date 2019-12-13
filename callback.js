@@ -7,9 +7,7 @@ fs.readFile('temp.txt', 'utf-8', function(err, content){
 
 console.log('after file')
 
-setTimeout(function(){
-    console.log('settimeout')
-},500)
+
 console.log('end')
 
 //start
