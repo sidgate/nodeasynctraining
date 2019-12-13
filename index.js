@@ -48,6 +48,22 @@ promise.then((content)=>{
 
 //assignment ====>
 var body;
+// var promisReadfile = util.promisify(fs.readFile)
+
+// promisReadfile('temp.txt','utf-8').then((content)=>{
+//     urls = content.split('\n');
+
+//     var jeson1 = rp.get(urls[0]);
+//     var jeson2 = rp.get(urls[1]);
+
+//      Promise.all([jeson1,jeson2]).then((response)=>{
+//         response.forEach(data => {
+//             body = JSON.parse(data);
+//             console.log("final ans =>"+body.CurrValue);
+//         })
+//      })
+// })
+
 var promisReadfile = util.promisify(fs.readFile)
 
 promisReadfile('temp.txt','utf-8').then((content)=>{
@@ -56,12 +72,19 @@ promisReadfile('temp.txt','utf-8').then((content)=>{
     var jeson1 = rp.get(urls[0]);
     var jeson2 = rp.get(urls[1]);
 
-     Promise.all([jeson1,jeson2]).then((response)=>{
-        response.forEach(data => {
-            body = JSON.parse(data);
-            console.log("final ans =>"+body.CurrValue);
-        })
+    var promise1 = Promise.all([jeson1,jeson2]).then((response)=>{
+        return response.map(data => {
+                body = JSON.parse(data);
+                var result=0; 
+                result=result+body.CurrValue;
+                return result;
+            })      
      })
+
+     promise1.then((value)=>{
+         console.log("finalresult"+value);
+     })
+
 })
 
 console.log('end')
