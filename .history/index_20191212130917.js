@@ -111,15 +111,18 @@ promiseReadFile('temp.txt','utf-8').then((content)=>{
         })
 })
 
-var promisReadfile = util.promisify(fs.readFile)
-promisReadfile('temp.txt','utf-8').then((content)=>{
-    urls = content.split('\n');
-    var jeson1 = rp.get(urls[0]);
-    var jeson2 = rp.get(urls[1]);
-     Promise.all([jeson1,jeson2]).then((response)=>{
-        response.forEach(data => {
-            body = JSON.parse(data);
-            console.log("final ans =>"+body.CurrValue);
-        })
-     })
-})
+
+// TODO closure
+// TODO File handling
+// TODO Http request
+// TODO callback hell
+// TODO Promise
+// TODO Resolve/Reject
+// TODO then/catch
+// TODO all
+// TODO Promisify
+// TODO async await
+// TODO Event loop
+// TODO Event listener
+
+
