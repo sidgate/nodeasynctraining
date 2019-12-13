@@ -143,18 +143,7 @@ promiseReadFile('temp.txt', 'utf-8').then((content)=>{
     then(()=>console.log('then'))
     .catch(()=>console.log('catch'))
 
-    // let promises = urls.map(function(url){
-    //     return rp.get(url)
-    // }).map(function(promise){
-    //     return promise.then((body)=>{
-    //         return JSON.parse(body).CurrValue
-    //     })
-    // })
-
-    // Promise.all(promises).then((arr)=>{
-    //     console.log (arr[0] +" "+  arr[1])
-    // })
-
+   
 
 
 })
