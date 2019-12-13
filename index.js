@@ -3,6 +3,7 @@ const util = require('util')
 const r = require('request');
 const fs = require('fs')
 const rp = require('request-promise')
+const fsp = require('fs').promises
 
 
 // TODO functions, lambda
@@ -120,6 +121,8 @@ promiseReadFile('temp.txt', 'utf-8').then((content)=>{
     let promise1 = rp.get(urls[0])
     let promise2 = rp.get(urls[1])
 
+
+
  
 
     promises.push(promise1)
@@ -157,13 +160,10 @@ promiseReadFile('temp.txt', 'utf-8').then((content)=>{
 })
 
 
-
-
-
 console.log('end')
 
-// TODO all
-// TODO Promisify
+//  all
+//  Promisify
 // TODO async await
 // TODO Event loop
 // TODO Event listener
