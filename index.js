@@ -2,7 +2,7 @@ const utilFn = require('./util-fn');
 const util = require('util')
 const r = require('request');
 const fs = require('fs')
-var promise=require('promise');
+//var promise=require('promise');
 // var urls;
 
 // TODO functions, lambda
@@ -97,14 +97,7 @@ fs.readFile('temp.txt','utf-8', function(err, content){
 console.log('end')
 
 
-var promise=new promise(function(resolve,reject){
-    // fs.readFile('temp.txt','utf-8',function(err,content){
-    //     if(err){
-    //         reject(err);
-    //         return;
-    //     }
-    //     return resolve(content);
-    // })
+var promise=new Promise(function(resolve,reject){
 
     fs.readFile('temp.txt','utf-8', function(err, content){
         urls = content.split('\n');
@@ -119,12 +112,60 @@ var promise=new promise(function(resolve,reject){
             return resolve(content);
         })
     
-    reject(new Error('some error'))
+ //   reject(new Error('some error'))
 });
 
 promise.then((content)=>{
     console.log(content);
+}).catch(function(err){
+    console.log(err +'some different error');
 })
+
+
+var promiseReadFile=util.promisify(fs.readFile)
+promiseReadFile('temp.txt','utf-8').then((content)=>{
+    urls=content.split('\n');
+    let promises=[]
+    let promise1=rp.get(urls[0]);
+    let promise2=rp.get(urls[1]);
+
+    promises.push(promise1)
+    promises.push(promise2)
+
+    var allpromises=promise.all(promises)
+    allpromises.then((result)=>{
+        let out=""
+        for(i=0;i<result.length;i++){
+            out+= JSON.parse(result[i].CurrValue)
+        }
+        console.log(out)
+    })
+
+//     urls.map(function(url){
+//         return rp.get(url)
+//     }).map(function(promise){
+//         return promise.then((body)=>{
+//             JSON.parse(body).CurrValue
+//         })
+//     })
+
+//     Promise.all(promises).then(arr)=>{
+//         console.log(arr[0] +" "+ arr[1])
+//     }
+// })
+
+// console.log([1,2,3,4,5].map(function(v){
+//     return v * v;
+// }))
+
+// console.log([1,2,3,4,5].map(function(v){
+//     return v * v;
+// }).filter(v=> v%2==0))
+
+// console.log([1,2,3,4,5].map(function(v){
+//     return v * v;
+// }).filter(v=> v%2==0))
+
 
 // TODO closure
 // TODO File handling
@@ -138,5 +179,4 @@ promise.then((content)=>{
 // TODO async await
 // TODO Event loop
 // TODO Event listener
-
 
