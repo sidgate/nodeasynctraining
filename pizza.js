@@ -1,4 +1,3 @@
-
 function startProcess()
 {
     console.log("=====Start Pizza App======");
